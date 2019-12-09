@@ -4,6 +4,7 @@ uci set luci.main.lang=zh_cn
 uci commit luci
 
 uci set system.@system[0].timezone=CST-8
+uci set system.@system[0].hostname=Clash_OpenWRT
 uci set system.@system[0].zonename=Asia/Shanghai
 uci commit system
 
@@ -66,6 +67,14 @@ sed -i 's/cbi.submit\"] = true/cbi.submit\"] = \"1\"/g' /usr/lib/lua/luci/dispat
 
 rm -rf /tmp/luci-modulecache/
 rm -f /tmp/luci-indexcache
+
+uci set network.lan.ipaddr='192.168.6.13'    //改成你想要默认的管理ip
+uci set network.lan.proto='static'          //lan口静态IP方式
+uci set network.lan.type='bridge'           //设置桥接
+uci set network.lan.ifname='eth0' //根据自己的路由器情况改Lan口 
+uci set network.lan.gateway='192.168.6.1'
+uci set network.lan.dns='223.5.5.5'
+uci commit network
 
 exit 0
 
