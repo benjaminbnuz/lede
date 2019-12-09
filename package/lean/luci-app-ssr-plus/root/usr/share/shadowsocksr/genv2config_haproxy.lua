@@ -2,7 +2,6 @@ local ucursor = require "luci.model.uci".cursor()
 local json = require "luci.jsonc"
 local server_section = arg[1]
 local proto = arg[2] 
-
 local local_port = arg[3]
 
 local server = ucursor:get_all("shadowsocksr", server_section)
@@ -31,8 +30,8 @@ local v2ray = {
         settings = {
             vnext = {
                 {
-                    address = server.server,
-                    port = tonumber(server.server_port),
+                    address = "0.0.0.0",
+                    port = '4433',
                     users = {
                         {
                             id = server.vmess_id,

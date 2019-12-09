@@ -1,5 +1,4 @@
 #!/bin/sh
-
 chnroute_data=$(wget -O- -t 3 -T 3 http://ftp.apnic.net/apnic/stats/apnic/delegated-apnic-latest)
 [ $? -eq 0 ] && {
     echo "$chnroute_data" | grep ipv4 | grep CN | awk -F\| '{ printf("%s/%d\n", $4, 32-log($5)/log(2)) }' > /tmp/china_ssr.txt
@@ -13,7 +12,7 @@ fi
 
 /usr/share/shadowsocksr/chinaipset.sh
 
-wget-ssl --no-check-certificate https://cdn.jsdelivr.net/gh/gfwlist/gfwlist/gfwlist.txt -O /tmp/gfw.b64
+wget-ssl --no-check-certificate https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt -O /tmp/gfw.b64
 /usr/bin/ssr-gfw
 
 if [ -s "/tmp/gfwnew.txt" ];then
