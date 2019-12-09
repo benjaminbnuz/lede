@@ -12,7 +12,7 @@ name: OpenWrt-CI
 on:
   push:
     branches: 
-      - Customed
+      - master
   # schedule:
   #   - cron: 0 20 * * *
   # release:
@@ -29,7 +29,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
         with:
-          ref: Customed
+          ref: master
 
       - name: Initialization environment
         env:
@@ -205,7 +205,7 @@ jobs:
           find ./bin/targets/ -name "*sysupgrade*bin*" | xargs -i mv -f {} ./artifact/
 
       - name: Upload artifact
-        uses: actions/upload-artifact@Customed
+        uses: actions/upload-artifact@master
         with:
           name: OpenWrt firmware
           path: ./artifact/
